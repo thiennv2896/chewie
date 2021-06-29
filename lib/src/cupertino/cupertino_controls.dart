@@ -288,7 +288,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
       double buttonPadding,
       ) {
     return GestureDetector(
-      onTap: _onExpandCollapse,
+      onTap: _onCloseTap,
       child: AnimatedOpacity(
         opacity: notifier.hideStuff ? 0.0 : 1.0,
         duration: const Duration(milliseconds: 300),
@@ -576,7 +576,7 @@ class _CupertinoControlsState extends State<CupertinoControls>
       child: Row(
         children: <Widget>[
           if (chewieController.isShowCloseButton && !chewieController.isFullScreen)
-            _buildCloseButton(backgroundColor, iconColor, barHeight, buttonPadding)
+            _buildCloseButton(backgroundColor, iconColor, barHeight, buttonPadding),
           if (chewieController.allowFullScreen)
             _buildExpandButton(
                 backgroundColor, iconColor, barHeight, buttonPadding),
@@ -631,8 +631,8 @@ class _CupertinoControlsState extends State<CupertinoControls>
     });
   }
 
-  void _onExitTap() {
-
+  void _onCloseTap() {
+    chewieController?.onCloseButtonTap();
   }
 
   Widget _buildProgressBar() {
