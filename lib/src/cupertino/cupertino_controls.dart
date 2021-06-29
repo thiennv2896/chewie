@@ -26,6 +26,7 @@ class CupertinoControls extends StatefulWidget {
   final Color backgroundColor;
   final Color iconColor;
 
+
   @override
   State<StatefulWidget> createState() {
     return _CupertinoControlsState();
@@ -269,6 +270,42 @@ class _CupertinoControlsState extends State<CupertinoControls>
                   chewieController.isFullScreen
                       ? CupertinoIcons.arrow_down_right_arrow_up_left
                       : CupertinoIcons.arrow_up_left_arrow_down_right,
+                  color: iconColor,
+                  size: 16,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  GestureDetector _buildCloseButton(
+      Color backgroundColor,
+      Color iconColor,
+      double barHeight,
+      double buttonPadding,
+      ) {
+    return GestureDetector(
+      onTap: _onExpandCollapse,
+      child: AnimatedOpacity(
+        opacity: notifier.hideStuff ? 0.0 : 1.0,
+        duration: const Duration(milliseconds: 300),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10.0),
+          child: BackdropFilter(
+            filter: ui.ImageFilter.blur(sigmaX: 10.0),
+            child: Container(
+              height: barHeight,
+              padding: EdgeInsets.only(
+                left: buttonPadding,
+                right: buttonPadding,
+              ),
+              color: backgroundColor,
+              child: Center(
+                child: Icon(
+                  CupertinoIcons.clear,
                   color: iconColor,
                   size: 16,
                 ),
@@ -538,6 +575,8 @@ class _CupertinoControlsState extends State<CupertinoControls>
       ),
       child: Row(
         children: <Widget>[
+          if (chewieController.isShowCloseButton && !chewieController.isFullScreen)
+            _buildCloseButton(backgroundColor, iconColor, barHeight, buttonPadding)
           if (chewieController.allowFullScreen)
             _buildExpandButton(
                 backgroundColor, iconColor, barHeight, buttonPadding),
@@ -590,6 +629,10 @@ class _CupertinoControlsState extends State<CupertinoControls>
         });
       });
     });
+  }
+
+  void _onExitTap() {
+
   }
 
   Widget _buildProgressBar() {
