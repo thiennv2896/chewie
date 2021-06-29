@@ -221,6 +221,7 @@ class ChewieState extends State<Chewie> {
 class ChewieController extends ChangeNotifier {
   ChewieController({
     required this.videoPlayerController,
+    this.isShowCloseButton = false,
     this.optionsTranslation,
     this.aspectRatio,
     this.autoInitialize = false,
@@ -284,6 +285,7 @@ class ChewieController extends ChangeNotifier {
     bool? allowFullScreen,
     bool? allowMuting,
     bool? allowPlaybackSpeedChanging,
+    bool? isShowCloseButton,
     List<double>? playbackSpeeds,
     List<SystemUiOverlay>? systemOverlaysOnEnterFullScreen,
     List<DeviceOrientation>? deviceOrientationsOnEnterFullScreen,
@@ -294,8 +296,7 @@ class ChewieController extends ChangeNotifier {
         routePageBuilder,
   }) {
     return ChewieController(
-      videoPlayerController:
-          videoPlayerController ?? this.videoPlayerController,
+      videoPlayerController: videoPlayerController ?? this.videoPlayerController,
       optionsTranslation: optionsTranslation ?? this.optionsTranslation,
       aspectRatio: aspectRatio ?? this.aspectRatio,
       autoInitialize: autoInitialize ?? this.autoInitialize,
@@ -336,8 +337,11 @@ class ChewieController extends ChangeNotifier {
       deviceOrientationsAfterFullScreen: deviceOrientationsAfterFullScreen ??
           this.deviceOrientationsAfterFullScreen,
       routePageBuilder: routePageBuilder ?? this.routePageBuilder,
+      isShowCloseButton: isShowCloseButton ?? this.isShowCloseButton
     );
   }
+
+  final bool isShowCloseButton;
 
   /// If false, the options button in MaterialUI and MaterialDesktopUI
   /// won't be shown.
