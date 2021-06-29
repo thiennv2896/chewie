@@ -222,6 +222,7 @@ class ChewieController extends ChangeNotifier {
   ChewieController({
     required this.videoPlayerController,
     this.isShowCloseButton = false,
+    this.onCloseButtonTap,
     this.optionsTranslation,
     this.aspectRatio,
     this.autoInitialize = false,
@@ -337,11 +338,14 @@ class ChewieController extends ChangeNotifier {
       deviceOrientationsAfterFullScreen: deviceOrientationsAfterFullScreen ??
           this.deviceOrientationsAfterFullScreen,
       routePageBuilder: routePageBuilder ?? this.routePageBuilder,
-      isShowCloseButton: isShowCloseButton ?? this.isShowCloseButton
+      isShowCloseButton: isShowCloseButton ?? this.isShowCloseButton,
+      onCloseButtonTap: onCloseButtonTap ?? this.onCloseButtonTap
     );
   }
 
   final bool isShowCloseButton;
+  
+  VoidCallback? onCloseButtonTap;
 
   /// If false, the options button in MaterialUI and MaterialDesktopUI
   /// won't be shown.
