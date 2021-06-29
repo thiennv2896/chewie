@@ -632,7 +632,8 @@ class _CupertinoControlsState extends State<CupertinoControls>
   }
 
   void _onCloseTap() {
-    chewieController?.onCloseButtonTap();
+    if (chewieController.onCloseButtonTap != null)
+      chewieController!.onCloseButtonTap();
   }
 
   Widget _buildProgressBar() {
