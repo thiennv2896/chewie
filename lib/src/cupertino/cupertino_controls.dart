@@ -281,33 +281,36 @@ class _CupertinoControlsState extends State<CupertinoControls>
     );
   }
 
-  GestureDetector _buildCloseButton(
+  Container _buildCloseButton(
       Color backgroundColor,
       Color iconColor,
       double barHeight,
       double buttonPadding,
       ) {
-    return GestureDetector(
-      onTap: _onCloseTap,
-      child: AnimatedOpacity(
-        opacity: notifier.hideStuff ? 0.0 : 1.0,
-        duration: const Duration(milliseconds: 300),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10.0),
-          child: BackdropFilter(
-            filter: ui.ImageFilter.blur(sigmaX: 10.0),
-            child: Container(
-              height: barHeight,
-              padding: EdgeInsets.only(
-                left: buttonPadding,
-                right: buttonPadding,
-              ),
-              color: backgroundColor,
-              child: Center(
-                child: Icon(
-                  CupertinoIcons.clear,
-                  color: iconColor,
-                  size: 16,
+    return Container(
+      margin: EdgeInsets.only(right: 10),
+      child: GestureDetector(
+        onTap: () => chewieController.onCloseButtonTap(),
+        child: AnimatedOpacity(
+          opacity: notifier.hideStuff ? 0.0 : 1.0,
+          duration: const Duration(milliseconds: 300),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: BackdropFilter(
+              filter: ui.ImageFilter.blur(sigmaX: 10.0),
+              child: Container(
+                height: barHeight,
+                padding: EdgeInsets.only(
+                  left: buttonPadding,
+                  right: buttonPadding,
+                ),
+                color: backgroundColor,
+                child: Center(
+                  child: Icon(
+                    CupertinoIcons.clear,
+                    color: iconColor,
+                    size: 16,
+                  ),
                 ),
               ),
             ),
@@ -629,11 +632,6 @@ class _CupertinoControlsState extends State<CupertinoControls>
         });
       });
     });
-  }
-
-  void _onCloseTap() {
-    if (chewieController.onCloseButtonTap != null)
-      chewieController!.onCloseButtonTap();
   }
 
   Widget _buildProgressBar() {
